@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investor Map</title>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6tNEXS_iB5NMG4isZHH9qXg9iiQnjkRc&libraries=visualization"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: { lat: 32.768799, lng: -97.309341 }
+            });
+
+            fetch('City_School_InvestorData.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(location => {
+                        var marker = new google.maps.Marker({
+                            position: { lat: location.latitude, lng: location.longitude },
+                            map: map,
+                            title: `${location.city}, ${location.school}\nInvestors: ${location.investor_count}\nTotal Properties: ${location.total_properties}`
+                        });
+                    });
+
+                    var heatmapData = data.map(location => ({
+                        location: new google.maps.LatLng(location.latitude, location.longitude),
+                        weight: location.investor_count / location.total_properties
+                    }));
+
+                    var heatmap = new google.maps.visualization.HeatmapLayer({
+                        data: heatmapData
+                    });
+
+                    heatmap.setMap(map);
+                });
+        }
+    </script>
+</head>
+<body onload="initMap()">
+    <h1>Investor Map</h1>
+    <div id="map"></div>
+</body>
+</html>

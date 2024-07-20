@@ -1,0 +1,19 @@
+[
+    {
+        "city": "Fort Worth",
+        "school": "School A",
+        "latitude": 32.755488,
+        "longitude": -97.330766,
+        "investor_count": 5,
+        "total_properties": 10
+    },
+    {
+        "city": "Arlington",
+        "school": "School B",
+        "latitude": 32.735687,
+        "longitude": -97.108066,
+        "investor_count": 3,
+        "total_properties": 5
+    }
+    // Add more data as needed
+]
