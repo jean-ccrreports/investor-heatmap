@@ -1,3 +1,0 @@
-git add index.html City_School_InvestorData.json
-git commit -m "Add initial map and data files"
-git push origin main
